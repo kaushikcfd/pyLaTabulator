@@ -78,7 +78,7 @@ ${row_name}\
                 with open(filename, 'w') as f:
                     ppm = subprocess.Popen(('pdftoppm -r 500 {0}'.format(
                         cropped_pdf)).split(), stdout=subprocess.PIPE)
-                    subprocess.call(['ppmtopng'], stdin=ppm.stdout, stdout=f)
+                    subprocess.call(['pnmtopng'], stdin=ppm.stdout, stdout=f)
                     ppm.wait()
         else:
             raise NotImplementedError()
