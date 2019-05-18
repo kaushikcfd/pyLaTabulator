@@ -3,6 +3,8 @@ from mako.template import Template
 import string
 import random
 import subprocess
+from PIL import Image
+import matplotlib.pyplot as plt
 
 
 class Table(object):
@@ -82,3 +84,11 @@ ${row_name}\
                     ppm.wait()
         else:
             raise NotImplementedError()
+
+    def display(self):
+        png_filename = ('/tmp/' +
+                ''.join(random.choice(string.ascii_letters) for _ in
+                    range(9)) + '.png')
+        self.generate(png_filename)
+        plt.imshow(Image.open(png_filename))
+        plt.show()

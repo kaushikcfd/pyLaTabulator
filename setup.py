@@ -13,7 +13,7 @@ finally:
 exec(compile(version_file_contents, "pyLaTabulator/version.py", 'exec'), ver_dic)
 
 setup(name="pyLaTabulator",
-      version="2018.1",
+      version="2019.1",
       description="Tabulate data through LaTeX's tabular package.",
       long_description=open("README.org").read(),
       classifiers=[
@@ -21,7 +21,7 @@ setup(name="pyLaTabulator",
           'Intended Audience :: Developers',
           'Intended Audience :: Other Audience',
           'Intended Audience :: Science/Research',
-          'License :: OSI Approved :: MIT License',
+          'License :: OSI Approved :: GNU GPL',
           'Natural Language :: English',
           'Programming Language :: Python',
           'Programming Language :: Python',
@@ -30,7 +30,6 @@ setup(name="pyLaTabulator",
           'Programming Language :: Python :: 3.4',
           'Topic :: Scientific/Engineering',
           'Topic :: Scientific/Engineering :: Information Analysis',
-          'Topic :: Scientific/Engineering :: Mathematics',
           'Topic :: Scientific/Engineering :: Visualization',
           'Topic :: Software Development :: Libraries',
           'Topic :: Utilities',
@@ -39,11 +38,13 @@ setup(name="pyLaTabulator",
       install_requires=[
           "numpy>=1.6.0",
           "Mako>=0.3.6",
+          "Pillow",
+          "matplotlib"
           ],
       dependency_links=[
           ],
 
       author="Kaushik Kulkarni",
       author_email="kgk2@illinois.edu",
-      license="MIT",
+      license="GNU GPL",
       packages=find_packages())
