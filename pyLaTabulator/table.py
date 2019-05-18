@@ -12,13 +12,17 @@ class Table(object):
 
         # {{{ sanity checks
 
+        if all(isinstance(col_name, str) for col_name in column_names):
+            column_names = [column_names]
+
         assert isinstance(data, np.ndarray)
         assert isinstance(column_names, list)
         assert isinstance(row_names, list)
-        assert all(isinstance(col_name, str) for col_name in column_names)
+        assert all(isinstance(col_name, list) for col_name in column_names)
         assert all(isinstance(row_name, str) for row_name in row_names)
         assert len(row_names) == data.shape[0]
-        assert len(column_names) == data.shape[1]
+        assert all((data.shape[1] % len(col_name)) == 0
+                for col_name in column_names)
 
         # }}}
 
@@ -29,14 +33,21 @@ class Table(object):
     def generate(self, filename=None):
         result_template = r"""\documentclass[11pt]{article}
 \thispagestyle{empty}
+\usepackage{booktabs}
 \begin{document}
-\begin{center}
-\begin{tabular}{l${'r'*len(col_names)}}
-\hline
+\begin{table}
+\begin{tabular}{c${'c'*data.shape[1]}}
+\toprule
+% for col_name in col_names:
+<%
+    cols_per_cell = data.shape[1] // len(col_name)
+    alignment = 'c'
+    delimiter = r'} & \multicolumn{' + str(cols_per_cell) + r'}{' + alignment +r'}{'  # noqa
+%>
+  \multicolumn{1}{c}{} ${delimiter[2:]}${delimiter.join(col_name)}}\\\
+% endfor
 
-  &  ${'  &  '.join(col_names)}\\\
-
-\hline
+\midrule
 % for (row_name, data_i) in zip(row_names, data):
 ${row_name}\
 % for data_ij in data_i:
@@ -46,19 +57,21 @@ ${row_name}\
 
 % endfor
 
-\hline
+\bottomrule
 \end{tabular}
-\end{center}
+\end{table}
 \end{document}
 """
         result = Template(result_template).render(
             row_names=self.row_names, col_names=self.column_names,
             data=self.data)
-        ext = filename[-4:]
 
         if filename is None:
             print(result)
-        elif ext == ".tex":
+            return
+
+        ext = filename[-4:]
+        if ext == ".tex":
             with open(filename, 'w') as f:
                 f.write(result)
         elif ext == ".pdf" or ext == ".png":
