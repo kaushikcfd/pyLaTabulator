@@ -74,9 +74,9 @@ ${row_name}\
                 subprocess.call(('mv {0} {1}'.format(
                     gen_pdf_filename, filename)).split())
             if ext == ".png":
-                subprocess.call(('pdfcrop -margin 3 {0}'.format(
-                    gen_pdf_filename)).split())
                 cropped_pdf = gen_pdf_filename[:-4]+'-crop.pdf'
+                subprocess.call(('pdfcrop -margin 3 {0} {1}'.format(
+                    gen_pdf_filename, cropped_pdf)).split())
                 with open(filename, 'w') as f:
                     ppm = subprocess.Popen(('pdftoppm -r 500 {0}'.format(
                         cropped_pdf)).split(), stdout=subprocess.PIPE)
