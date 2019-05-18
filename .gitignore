@@ -1,0 +1,6 @@
+.*.sw[op]
+*~
+__pycache__
+*.egg-info
+.env
+doc/_build/*

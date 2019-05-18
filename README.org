@@ -1,0 +1,22 @@
+#+TITLE: PyLaTabulator
+
+Simple tool to typeset table-like data structures to LaTeX.
+
+#+BEGIN_SRC python
+from pyLaTabulator import Table
+import numpy as np
+
+data = np.array([
+    [1.0, 2.0],
+    [3.0, 4.0]])
+row_names = ['R1', 'R2']
+column_names = ['C1', 'C2']
+
+Table(data, row_names, column_names).generate('output.png')
+# Table(data, row_names, column_names).generate('output.tex')  # For tex
+# Table(data, row_names, column_names).generate('output.pdf')  # For PDF
+#+END_SRC
+
+This would generate.
+
+[[file:examples/output/output.png]]
