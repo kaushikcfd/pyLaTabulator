@@ -22,6 +22,11 @@ The table would be displayed as
 
 [[file:examples/output/display.png]]
 
+
+It is also possible to generate slightly more examples like --
+
+[[file:examples/output/highlight-min.png]]
+
 * Requirements
 - [[https://www.ctan.org/pkg/pdfcrop?lang=en][pdfcrop]]: Shipped with =TeXLive=, if not the link contains the required script.
 - [[https://poppler.freedesktop.org/][pdftoppm]]: Source code in the link.

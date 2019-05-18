@@ -30,10 +30,23 @@ class Table(object):
         self.row_names = row_names
         self.column_names = column_names
 
+    def format(self, i, j):
+        return str(self.data[i, j])
+
+    def preamble(self):
+        return ""
+
     def generate(self, filename=None):
+        formatted_data = np.ndarray(shape=self.data.shape, dtype=np.dtype('U25'))
+        for i in range(self.data.shape[0]):
+            for j in range(self.data.shape[1]):
+                formatted_data[i, j] = self.format(i, j)
+
         result_template = r"""\documentclass[11pt]{article}
-\thispagestyle{empty}
 \usepackage{booktabs}
+${preamble}
+
+\thispagestyle{empty}
 \begin{document}
 \begin{table}
 \begin{tabular}{c${'c'*data.shape[1]}}
@@ -44,14 +57,16 @@ class Table(object):
     alignment = 'c'
     delimiter = r'} & \multicolumn{' + str(cols_per_cell) + r'}{' + alignment +r'}{'  # noqa
 %>
-  \multicolumn{1}{c}{} ${delimiter[2:]}${delimiter.join(col_name)}}\\\
+\multicolumn{1}{c}{} ${delimiter[2:]}${delimiter.join(col_name)}}\\\
 % endfor
 
+
 \midrule
-% for (row_name, data_i) in zip(row_names, data):
-${row_name}\
-% for data_ij in data_i:
-  &  ${data_ij}\
+
+% for i in range(data.shape[0]):
+${row_names[i]}\
+% for j in range(data.shape[1]):
+  &  ${data[i, j]}\
 % endfor
 \\\
 
@@ -62,9 +77,9 @@ ${row_name}\
 \end{table}
 \end{document}
 """
-        result = Template(result_template).render(
-            row_names=self.row_names, col_names=self.column_names,
-            data=self.data)
+        result = Template(result_template).render(row_names=self.row_names,
+                col_names=self.column_names, data=formatted_data,
+                preamble=self.preamble())
 
         if filename is None:
             print(result)
