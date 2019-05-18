@@ -12,9 +12,9 @@ data = np.array([
 row_names = ['R1', 'R2']
 column_names = ['C1', 'C2']
 
-Table(data, row_names, column_names).generate('output.png')
-# Table(data, row_names, column_names).generate('output.tex')  # For tex
-# Table(data, row_names, column_names).generate('output.pdf')  # For PDF
+Table(data, column_names, row_names).generate('output.png')
+# Table(data, column_names, row_names).generate('output.tex')  # For tex
+# Table(data, column_names, row_names).generate('output.pdf')  # For PDF
 #+END_SRC
 
 This would generate.

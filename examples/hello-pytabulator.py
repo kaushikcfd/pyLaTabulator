@@ -7,4 +7,4 @@ data = np.array([
 row_names = ['R1', 'R2']
 column_names = ['C1', 'C2']
 
-Table(data, row_names, column_names).generate('danda.tex')
+Table(data, column_names, row_names).generate('danda.tex')
