@@ -23,7 +23,7 @@ The table would be displayed as
 [[file:examples/output/display.png]]
 
 
-It is also possible to generate slightly more examples, like highlighting the
+It is also possible to generate slightly more complex examples easily, like highlighting the
 minimum element in a column --
 
 [[file:examples/output/highlight-min.png]]
