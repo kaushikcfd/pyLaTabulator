@@ -21,5 +21,5 @@ class HRuleAddedTable(Table):
             return ""
 
 
-HRuleAddedTable(data, column_names, row_names).display()
-# HRuleAddedTable(data, column_names, row_names).generate()
+# HRuleAddedTable(data, column_names, row_names).display()
+HRuleAddedTable(data, column_names, row_names).generate('hierarchical-row.png')
