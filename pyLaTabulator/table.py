@@ -53,10 +53,8 @@ class Table(object):
             rule[i] = self.hrule_adder(i)
 
         result_template = r"""\documentclass[11pt]{article}
-\usepackage{geometry}
 \usepackage{multirow}
 \usepackage{booktabs}
-\geometry{papersize={1414mm, 1000mm}}
 ${preamble}
 
 \thispagestyle{empty}
@@ -102,6 +100,16 @@ ${rule[i]}
 
         ext = filename[-4:]
         if ext == ".tex":
+            # if the desired output is tex only, then only extract the tabular
+            # part.
+            resultlines = result.split("\n")
+            begintabular_idx, = [i for i, line in enumerate(resultlines)
+                                 if line.startswith(r"\begin{tabular}")]
+            endtabular_idx, = [i for i, line in enumerate(resultlines)
+                               if line.startswith(r"\end{tabular}")]
+
+            result = "\n".join(resultlines[begintabular_idx:endtabular_idx+1])
+
             with open(filename, 'w') as f:
                 f.write(result)
         elif ext == ".pdf" or ext == ".png":

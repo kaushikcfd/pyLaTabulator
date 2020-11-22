@@ -10,36 +10,37 @@ try:
 finally:
     version_file.close()
 
-exec(compile(version_file_contents, "pyLaTabulator/version.py", 'exec'), ver_dic)
+exec(compile(version_file_contents, "pyLaTabulator/version.py", "exec"), ver_dic)
 
 setup(name="pyLaTabulator",
       version="2019.1",
       description="Tabulate data through LaTeX's tabular package.",
       long_description=open("README.org").read(),
       classifiers=[
-          'Development Status :: 4 - Beta',
-          'Intended Audience :: Developers',
-          'Intended Audience :: Other Audience',
-          'Intended Audience :: Science/Research',
-          'License :: OSI Approved :: GNU GPL',
-          'Natural Language :: English',
-          'Programming Language :: Python',
-          'Programming Language :: Python',
-          'Programming Language :: Python :: 3',
-          'Programming Language :: Python :: 3.3',
-          'Programming Language :: Python :: 3.4',
-          'Topic :: Scientific/Engineering',
-          'Topic :: Scientific/Engineering :: Information Analysis',
-          'Topic :: Scientific/Engineering :: Visualization',
-          'Topic :: Software Development :: Libraries',
-          'Topic :: Utilities',
+          "Development Status :: 4 - Beta",
+          "Intended Audience :: Developers",
+          "Intended Audience :: Other Audience",
+          "Intended Audience :: Science/Research",
+          "License :: OSI Approved :: GNU GPL",
+          "Natural Language :: English",
+          "Programming Language :: Python",
+          "Programming Language :: Python",
+          "Programming Language :: Python :: 3",
+          "Programming Language :: Python :: 3.3",
+          "Programming Language :: Python :: 3.4",
+          "Topic :: Scientific/Engineering",
+          "Topic :: Scientific/Engineering :: Information Analysis",
+          "Topic :: Scientific/Engineering :: Visualization",
+          "Topic :: Software Development :: Libraries",
+          "Topic :: Utilities",
           ],
 
       install_requires=[
           "numpy>=1.6.0",
           "Mako>=0.3.6",
           "Pillow",
-          "matplotlib"
+          "matplotlib",
+          "pytools",
           ],
       dependency_links=[
           ],
